@@ -32,7 +32,15 @@ Phase 2: financial model and PPA pricing using step 7 output.
 - Data: PVGIS weather (covers Oman), CEC module/inverter libraries
 
 ## Build order
-- Milestone 1 (MVP): steps 1–4 in the browser; show module count and total kWp.
+- Milestone 1 (MVP): steps 1–4 in the browser; show module count and total kWp. (Built in `web/`.)
+- Milestone 1b — drawing import: upload a villa roof drawing (DXF; PDF vector drawings; DWG via conversion to DXF), set its scale (two points + known distance), place and rotate it on the satellite map / set true north, pick the terrace outlines as field segments, then auto-layout panels using each roof's azimuth.
+- Milestone 1c — 3D sun & shadow view: basic 3D model (Three.js) of roof, parapets, keepouts with heights and panels; sun path for any date/time using an accurate solar position algorithm (NREL SPA) at the site's real coordinates; animated shadows across the day and year; per-module shading %.
 - Milestone 2: steps 6–7 (backend + pvlib).
-- Milestone 3: steps 5 and 8.
+- Milestone 3: step 8 (reports), and feed 1c shading into the energy simulation.
 - Milestone 4: phase 2 financials/PPA.
+
+## Code layout
+- `web/` — React + Vite front end. `npm run dev`, `npm test`, `npm run build`.
+- `web/src/layout.ts` — auto panel layout engine (pure functions, unit-tested in `layout.test.ts`).
+- Drawing tools are a small custom click-to-draw in `App.tsx` (Terra Draw may replace it when vertex editing is needed).
+- Preview site: the built `web/dist` is published to the `gh-pages` branch (GitHub Pages).
